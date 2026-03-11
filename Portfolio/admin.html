@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+  <div class="card">
+
+    <div class="admin-header">
+      <h1>Contact Messages</h1>
+      <button class="btn-logout" onclick="logout()">Logout</button>
+    </div>
+
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Subject</th>
+          <th>Message</th>
+          <th>Created</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+
+    <div class="pagination">
+      <button class="btn btn-secondary" id="prevBtn">Previous</button>
+      <button class="btn btn-secondary" id="nextBtn">Next</button>
+    </div>
+
+  </div>
+
+  <script>
+    let currentPage = 0;
+    const pageSize = 5;
+
+    const auth = sessionStorage.getItem("auth");
+    if (!auth) {
+      window.location.href = "admin-login.html";
+    }
+
+    const tableBody = document.getElementById("tableBody");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    async function fetchMessages(page) {
+      const response = await fetch(
+        `http://localhost:8080/api/contact?page=${page}&size=${pageSize}&sort=id,desc`,
+        {
+          headers: {
+            "Authorization": "Basic " + auth
+          }
+        }
+      );
+
+      if (response.status === 401) {
+        sessionStorage.removeItem("auth");
+        window.location.href = "admin-login.html";
+        return;
+      }
+
+      const data = await response.json();
+
+      tableBody.innerHTML = "";
+
+      data.content.forEach(msg => {
+        tableBody.innerHTML += `
+      <tr>
+        <td>${msg.id}</td>
+        <td>${msg.fullName}</td>
+        <td>${msg.email}</td>
+        <td>${msg.subject}</td>
+        <td>${msg.message}</td>
+        <td>${new Date(msg.createdAt).toLocaleString()}</td>
+        <td>
+          <button class="btn btn-danger" onclick="deleteMsg(${msg.id})">
+    Delete
+</button>
+
+        </td>
+      </tr>
+    `;
+      });
+
+      prevBtn.disabled = data.first;
+      nextBtn.disabled = data.last;
+      currentPage = data.number;
+    }
+
+    async function deleteMsg(id) {
+      if (!confirm("Delete this message?")) return;
+
+      await fetch(`http://localhost:8080/api/contact/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Authorization": "Basic " + auth
+        }
+      });
+
+      fetchMessages(currentPage);
+    }
+
+    function logout() {
+      sessionStorage.removeItem("auth");
+      window.location.href = "admin-login.html";
+    }
+
+    prevBtn.addEventListener("click", () => {
+      if (currentPage > 0) fetchMessages(currentPage - 1);
+    });
+
+    nextBtn.addEventListener("click", () => {
+      fetchMessages(currentPage + 1);
+    });
+
+    fetchMessages(currentPage);
+  </script>
+
+</body>
+
+</html>

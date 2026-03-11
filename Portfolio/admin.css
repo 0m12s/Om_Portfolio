@@ -1,0 +1,222 @@
+/* =========================
+   RESET
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* =========================
+   BACKGROUND
+========================= */
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a, #0b1120);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+/* =========================
+   CARD WRAPPER
+========================= */
+.card {
+  width: 95%;
+  max-width: 1200px;
+  background: rgba(20, 20, 30, 0.95);
+  padding: 40px;
+  border-radius: 18px;
+  box-shadow: 0 0 60px rgba(0, 255, 100, 0.08);
+}
+
+/* LOGIN PAGE */
+
+.login-wrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  background: rgba(20, 20, 30, 0.95);
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 0 40px rgba(0, 255, 100, 0.1);
+}
+
+.login-card h2 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.login-card input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background: #0f172a;
+  color: white;
+}
+
+.login-card input:focus {
+  outline: none;
+  border-color: #22c55e;
+}
+
+.login-card button {
+  width: 100%;
+}
+
+/* =========================
+   HEADER
+========================= */
+.admin-header {
+  position: relative;
+  height: 70px;
+  margin-bottom: 35px;
+}
+
+.admin-header h1 {
+  text-align: center;
+  line-height: 70px;
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.btn-logout {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #22c55e;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.btn-logout:hover {
+  background: #16a34a;
+}
+
+/* =========================
+   TABLE
+========================= */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.admin-table thead {
+  background: #1f2937;
+}
+
+.admin-table th {
+  padding: 16px 14px;
+  text-align: left;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  color: #22c55e;
+}
+
+.admin-table td {
+  padding: 18px 14px;
+  border-bottom: 1px solid #1e293b;
+  font-size: 14px;
+  vertical-align: top;
+  word-break: break-word;
+}
+
+.admin-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* COLUMN WIDTHS */
+.admin-table th:nth-child(1),
+.admin-table td:nth-child(1) {
+  width: 60px;
+}
+
+.admin-table th:nth-child(2),
+.admin-table td:nth-child(2) {
+  width: 140px;
+}
+
+.admin-table th:nth-child(3),
+.admin-table td:nth-child(3) {
+  width: 200px;
+}
+
+.admin-table th:nth-child(4),
+.admin-table td:nth-child(4) {
+  width: 180px;
+}
+
+.admin-table th:nth-child(6),
+.admin-table td:nth-child(6) {
+  width: 170px;
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+.admin-table th:nth-child(7),
+.admin-table td:nth-child(7) {
+  width: 110px;
+}
+
+/* Message column flexible */
+.admin-table th:nth-child(5),
+.admin-table td:nth-child(5) {
+  width: auto;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+.btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.btn-danger {
+  background: #ef4444;
+  color: white;
+}
+
+.btn-danger:hover {
+  background: #dc2626;
+}
+
+.btn-secondary {
+  background: #374151;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: #4b5563;
+}
+
+/* =========================
+   PAGINATION
+========================= */
+.pagination {
+  margin-top: 25px;
+  display: flex;
+  gap: 12px;
+}
