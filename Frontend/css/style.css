@@ -395,7 +395,7 @@ html:not([data-theme="dark"]) .sun {
 
 .hero-image img {
   width: 400px;
-  height: 400px;
+  aspect-ratio: 1 / 1; 
   border-radius: 50%;
   object-fit: cover;
   box-shadow:
